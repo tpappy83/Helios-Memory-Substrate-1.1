@@ -1,13 +1,54 @@
-Copyright 2026 Travis Papenbrock
+# Security Policy
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this project except in compliance with the License.
-You may obtain a copy of the License at:
+Helios Memory Substrate is designed to interact with external systems, automation pipelines, and AI agents. Because of this, security, privacy, and integrity of data are treated as first‑class concerns.
 
-    http://www.apache.org/licenses/LICENSE-2.0
+This document describes how security is handled for the project, how to report vulnerabilities, and what you can expect in terms of response and remediation.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+---
+
+## Supported versions
+
+Security updates apply to the `main` branch.
+
+- **Active development:** `main`
+- **Tags / releases:** Only the latest tagged release is considered for security fixes.
+- **Forks / derivatives:** No guarantees are made for forks or modified versions.
+
+If you are running a pinned commit or a fork, you are responsible for backporting fixes.
+
+---
+
+## Reporting a vulnerability
+
+If you believe you have found a security vulnerability, **do not open a public issue or pull request.**
+
+Instead, email:
+
+- **Security contact:** `tpapenb@iu.edu`
+
+Please include, at minimum:
+
+- **Description:** Clear explanation of the issue and why you believe it is a vulnerability.  
+- **Impact:** What an attacker could do if the issue is exploited.  
+- **Steps to reproduce:** Exact steps, scripts, or configuration needed to reproduce.  
+- **Environment details:** OS, Python version, dependencies, and any relevant configuration.  
+- **Suggested fix (optional):** Any ideas you have for remediation or mitigation.
+
+If the issue involves sensitive data, credentials, or private infrastructure details, keep those redacted or minimized and indicate that more detail can be shared securely if needed.
+
+There is currently **no formal bug bounty program**, but all good‑faith reports are appreciated and taken seriously.
+
+---
+
+## Disclosure timeline and response targets
+
+These are **targets**, not guarantees, but we aim to meet or exceed them for all good‑faith reports:
+
+- **Acknowledgment:** within **48 hours** of receiving your report.  
+- **Initial investigation:** within **7 days** to validate and scope the issue.  
+- **Fix or mitigation:** within **30 days** for confirmed, non‑trivial vulnerabilities.  
+- **Public disclosure:** after a fix or mitigation is available, or by mutual agreement.
+
+If a vulnerability is especially severe or actively exploited, timelines may be accelerated and a security advisory may be published.
+
+If we determine that a reported issue is not a security vulnerability, we will explain why and—where appropriate—may suggest opening a regular GitHub
