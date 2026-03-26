@@ -102,3 +102,26 @@ tests/
 ├── test_production_node.py
 └── test_quark_ingest.py
 
+## Contributing and Collaboration
+
+Contributions are welcome and encouraged. To contribute:
+
+1. Fork the repository.
+2. Create a feature branch:
+   git checkout -b feature/my-feature
+3. Commit your changes with clear messages.
+4. Push your branch:
+   git push origin feature/my-feature
+5. Open a Pull Request.
+
+### Collaboration Guidelines
+
+- Use Issues to report bugs or request features.
+- Use Discussions for architectural questions or design proposals.
+- Follow the coding style and testing requirements in CONTRIBUTING.md.
+- Be respectful and constructive in all interactions.
+
+### Communication
+
+For questions or collaboration proposals, contact:
+tpapenb@iu.edu
