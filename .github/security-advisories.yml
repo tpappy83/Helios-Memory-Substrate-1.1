@@ -1,0 +1,44 @@
+# GitHub Security Advisories workflow
+# This workflow listens for advisory events and automates publication
+# and CVE management. It requires minimal permissions and can be
+# extended with additional steps for notification or triage.
+
+name: Security Advisories
+
+on:
+  # Trigger when a security advisory is published, edited, or withdrawn
+  security_advisory:
+    types: [published, updated, withdrawn]
+
+jobs:
+  manage_advisory:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display advisory details
+        run: |
+          echo "Action: ${{ github.event.action }}"
+          echo "Advisory ID: ${{ github.event.security_advisory.ghsa_id }}"
+          echo "CVE ID: ${{ github.event.security_advisory.cve_id }}"
+          echo "Summary: ${{ github.event.security_advisory.summary }}"
+          echo "Severity: ${{ github.event.security_advisory.severity }}"
+
+      # Example step to request a CVE if none has been assigned. Replace with a real action or API call.
+      - name: Request CVE identifier if missing
+        if: ${{ github.event.security_advisory.cve_id == '' && github.event.action == 'published' }}
+        run: |
+          echo "No CVE ID assigned; you can integrate a tool or API here to request one."
+          # gh security-advisories cve request could be placed here
+
+      # Example step to publish the advisory. Replace with a real action to interact with the GitHub Advisory API.
+      - name: Publish advisory
+        if: ${{ github.event.action == 'published' }}
+        run: |
+          echo "Publishing advisory: ${{ github.event.security_advisory.ghsa_id }}"
+          # Integrate with your publication tooling or notifications here.
