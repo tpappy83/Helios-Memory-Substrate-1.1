@@ -1,3 +1,6 @@
+
+[![Build Status](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/actions/workflows/main.yml/badge.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/actions/workflows/main.yml) [![License](https://img.shields.io/github/license/tpappy83/Helios-Memory-Substrate-1.1.svg)](LICENSE) [![Issues](https://img.shields.io/github/issues/tpappy83/Helios-Memory-Substrate-1.1.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/issues) [![Stars](https://img.shields.io/github/stars/tpappy83/Helios-Memory-Substrate-1.1.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/stargazers)
+
 # Helios Memory Substrate
 
 Helios Memory Substrate is a distributed, high-performance memory architecture designed to support long-context AI systems, agentic workflows, and large-scale vector-based retrieval. It provides a tiered substrate for ingesting, indexing, scoring, and retrieving high-cardinality memory objects with predictable latency and horizontal scalability.
@@ -74,3 +77,28 @@ See ROADMAP.md for planned milestones.
 ## License
 
 Apache 2.0 — you retain 100 percent ownership.
+## Testing
+
+Helios Memory Substrate uses pytest for testing.
+
+### Running the Test Suite
+
+1. Install dependencies:
+   pip install -r requirements.txt
+
+2. Run all tests:
+   pytest -v
+
+3. Run a specific test file:
+   pytest tests/test_production_node.py
+
+4. Generate a coverage report:
+   pytest --cov=.
+
+### Test Directory Structure
+
+tests/
+├── test_helios_core.py
+├── test_production_node.py
+└── test_quark_ingest.py
+
