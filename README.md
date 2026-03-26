@@ -64,7 +64,7 @@ print(node.get_status())
 
 ## Contributing
 
-See CONTRIBUTING.md for full guidelines.
+See [[CONTRIBUTING.md](CONTRIBUTING.md).md](CONTRIBUTING.md).md for full guidelines.
 
 ## Security
 
@@ -88,7 +88,7 @@ Helios Memory Substrate uses pytest for testing.
 
 2. Run all tests:
    pytest -v
-
+[CONTRIBUTING.md](CONTRIBUTING.md)
 3. Run a specific test file:
    pytest tests/test_production_node.py
 
