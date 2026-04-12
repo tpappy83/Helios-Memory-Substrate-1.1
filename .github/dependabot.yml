@@ -4,18 +4,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-author: "tpappy83"
-    commit-owner: "tpappy83"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-author: "tpappy83"
-    commit-owner: "tpappy83"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-author: "tpappy83"
-    commit-owner: "tpappy83"
 

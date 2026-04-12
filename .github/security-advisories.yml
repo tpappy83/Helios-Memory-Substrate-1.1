@@ -6,16 +6,15 @@ on:
   schedule:
     - cron: "0 3 * * *"  # Daily at 03:00 UTC
 
-permissions:
-  contents: write
-  security-events: write
-  actions: read
-  issues: write
+permissions: {}
 
 jobs:
   manage_security_advisory:
     name: Manage Security Advisory
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -52,6 +51,9 @@ jobs:
   supply_chain_governance:
     name: Supply‑Chain Governance
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
