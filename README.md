@@ -64,7 +64,7 @@ print(node.get_status())
 
 ## Contributing
 
-See [[CONTRIBUTING.md](CONTRIBUTING.md).md](CONTRIBUTING.md).md for full guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ## Security
 
@@ -76,7 +76,12 @@ See ROADMAP.md for planned milestones.
 
 ## License
 
-Apache 2.0 — you retain 100 percent ownership.
+This project is licensed under the **PolyForm Noncommercial License 1.0.0** with the **Commons Clause** condition.
+
+- Non-commercial use (research, personal projects, education, open-source) is freely permitted.
+- Commercial use — including selling, hosting as a service, or incorporating into a commercial product — is **prohibited** without a separate commercial license from Travis Papenbrock.
+
+See [LICENSE](LICENSE) for the full terms. To inquire about a commercial license, contact tpapenb@iu.edu.
 ## Testing
 
 Helios Memory Substrate uses pytest for testing.

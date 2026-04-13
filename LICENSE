@@ -1,54 +1,89 @@
-# Security Policy
+PolyForm Noncommercial License 1.0.0
 
-Helios Memory Substrate is designed to interact with external systems, automation pipelines, and AI agents. Because of this, security, privacy, and integrity of data are treated as first‑class concerns.
+Copyright (c) 2026 Travis Papenbrock
 
-This document describes how security is handled for the project, how to report vulnerabilities, and what you can expect in terms of response and remediation.
-
----
-
-## Supported versions
-
-Security updates apply to the `main` branch.
-
-- **Active development:** `main`
-- **Tags / releases:** Only the latest tagged release is considered for security fixes.
-- **Forks / derivatives:** No guarantees are made for forks or modified versions.
-
-If you are running a pinned commit or a fork, you are responsible for backporting fixes.
+https://polyformproject.org/licenses/noncommercial/1.0.0
 
 ---
 
-## Reporting a vulnerability
+## Acceptance
 
-If you believe you have found a security vulnerability, **do not open a public issue or pull request.**
+In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.
 
-Instead, email:
+## Copyright License
 
-- **Security contact:** `tpapenb@iu.edu`
+The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. However, you may only distribute the software according to Distribution License and make changes or new works based on the software according to Changes and New Works License.
 
-Please include, at minimum:
+## Distribution License
 
-- **Description:** Clear explanation of the issue and why you believe it is a vulnerability.  
-- **Impact:** What an attacker could do if the issue is exploited.  
-- **Steps to reproduce:** Exact steps, scripts, or configuration needed to reproduce.  
-- **Environment details:** OS, Python version, dependencies, and any relevant configuration.  
-- **Suggested fix (optional):** Any ideas you have for remediation or mitigation.
+The licensor grants you an additional copyright license to distribute copies of the software. Your license to distribute covers distributing the software with changes and new works permitted by Changes and New Works License.
 
-If the issue involves sensitive data, credentials, or private infrastructure details, keep those redacted or minimized and indicate that more detail can be shared securely if needed.
+## Notices
 
-There is currently **no formal bug bounty program**, but all good‑faith reports are appreciated and taken seriously.
+You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with `Required Notice:` that the licensor provided with the software. For example:
+
+> Required Notice: Copyright (c) 2026 Travis Papenbrock
+
+## Changes and New Works License
+
+The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.
+
+## Patent License
+
+The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.
+
+## Noncommercial Purposes
+
+Use for the sole purpose of scientific research, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, counts as use for a noncommercial purpose.
+
+## Personal Uses
+
+Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, counts as use for a noncommercial purpose.
+
+## Noncommercial Organizations
+
+Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution counts as use for a noncommercial purpose regardless of the source of funding or obligations resulting from the funding.
+
+## Commercial Use Prohibited
+
+Use for commercial purposes is strictly prohibited and not covered by this license. Commercial purposes include, but are not limited to: selling, licensing, or otherwise commercializing the software or any derivative; incorporating the software into a commercial product or service; using the software to provide services to third parties for compensation; or using the software in any manner that generates revenue or is intended to generate revenue.
+
+## Fair Use
+
+You may have "fair use" rights for the software under the law. These terms do not limit them.
+
+## No Other Rights
+
+These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else. These terms do not imply any other licenses.
+
+## Patent Defense
+
+If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.
+
+## Violations
+
+The first time you are notified in writing that you have violated any of these terms, and you stop your violation within 30 days of your notification, your license continues permanently. Otherwise, your license ends immediately.
+
+## Reliability
+
+The licensor cannot revoke this license.
+
+## No Liability
+
+**As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.**
 
 ---
 
-## Disclosure timeline and response targets
+## Commons Clause
 
-These are **targets**, not guarantees, but we aim to meet or exceed them for all good‑faith reports:
+"Commons Clause" License Condition v1.0
 
-- **Acknowledgment:** within **48 hours** of receiving your report.  
-- **Initial investigation:** within **7 days** to validate and scope the issue.  
-- **Fix or mitigation:** within **30 days** for confirmed, non‑trivial vulnerabilities.  
-- **Public disclosure:** after a fix or mitigation is available, or by mutual agreement.
+The Software is provided to you by the Licensor under the License, as defined below, subject to the following condition.
 
-If a vulnerability is especially severe or actively exploited, timelines may be accelerated and a security advisory may be published.
+Without limiting other conditions in the License, the grant of rights under the License will not include, and the License does not grant to you, the right to Sell the Software.
 
-If we determine that a reported issue is not a security vulnerability, we will explain why and—where appropriate—may suggest opening a regular GitHub
+For purposes of the foregoing, "Sell" means practicing any or all of the rights granted to you under the License to provide to third parties, for a fee or other consideration (including without limitation fees for hosting or consulting/support services related to the Software), a product or service whose value derives, entirely or substantially, from the functionality of the Software. Any license notice or attribution required by the License must also include this Commons Clause License Condition notice.
+
+Software: Helios Memory Substrate  
+License: PolyForm Noncommercial License 1.0.0  
+Licensor: Travis Papenbrock
