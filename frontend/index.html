@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helios — memory-grounded chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo-dot"></span>
+    <span class="logo-text">helios</span>
+    <span class="logo-version">v0.2.0</span>
+  </div>
+  <div class="topbar-meta">
+    <button id="conn-status" class="conn-pill conn-pending" type="button" title="Connection settings">
+      <span class="conn-dot"></span><span class="conn-label">connecting</span>
+    </button>
+    <span class="schema-badge">schema v2</span>
+  </div>
+</header>
+
+<main class="app">
+
+  <!-- ═══ LEFT: Chat ═══ -->
+  <section class="chat-panel">
+    <div id="chat-empty" class="empty-state">
+      <h1>Memory-grounded chat.</h1>
+      <p class="empty-lede">Send any message. Helios classifies it, reranks against existing memories,
+      applies tier-aware temperature feedback, persists it, and writes an audit entry — all visible to the right.</p>
+      <div class="empty-suggestions">
+        <button class="suggestion" data-msg="I decided to ship Helios v0.2 with tiering and namespace isolation.">
+          <span class="suggestion-type">decision</span>
+          <span>I decided to ship Helios v0.2 with tiering and namespace isolation.</span>
+        </button>
+        <button class="suggestion" data-msg="The FTS5 retrieval latency averaged 4ms across the test corpus.">
+          <span class="suggestion-type">observation</span>
+          <span>The FTS5 retrieval latency averaged 4ms across the test corpus.</span>
+        </button>
+        <button class="suggestion" data-msg="What memories do I have about tiering decisions?">
+          <span class="suggestion-type">query</span>
+          <span>What memories do I have about tiering decisions?</span>
+        </button>
+      </div>
+    </div>
+
+    <ul id="chat-log" class="chat-log" aria-live="polite"></ul>
+
+    <form id="chat-form" class="chat-form">
+      <div class="input-shell">
+        <textarea
+          id="chat-input"
+          class="chat-input"
+          placeholder="Ask Helios or share a memory…"
+          rows="1"
+          autocomplete="off"
+          spellcheck="true"
+        ></textarea>
+        <button id="send-btn" class="send-btn" type="submit" aria-label="Send" disabled>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M12 19 V5 M5 12 L12 5 L19 12" fill="none" stroke="currentColor"
+                  stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="status-bar">
+        <span class="status-item">
+          <span class="status-label">namespace</span>
+          <span class="status-value" id="status-namespace">default</span>
+        </span>
+        <span class="status-divider">·</span>
+        <span class="status-item">
+          <span class="status-label">records</span>
+          <span class="status-value" id="status-records">0</span>
+        </span>
+        <span class="status-divider">·</span>
+        <span class="status-item">
+          <span class="status-label">tiers</span>
+          <span class="status-value" id="status-tiers">cold:0 hot:0</span>
+        </span>
+        <span class="status-divider">·</span>
+        <span class="status-item">
+          <span class="status-label">last</span>
+          <span class="status-value" id="status-latency">—</span>
+        </span>
+      </div>
+    </form>
+  </section>
+
+  <!-- ═══ RIGHT: Pipeline ═══ -->
+  <aside class="pipeline-panel">
+    <div class="pipeline-header">
+      <span class="eyebrow">pipeline</span>
+      <span class="pipeline-sub">ingest → score → read → modify → write → store</span>
+    </div>
+
+    <ol id="pipeline" class="pipeline">
+      <li class="stage" data-stage="ingest">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Ingest</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">Capture incoming message + namespace</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+      <li class="stage" data-stage="score">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Score</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">LLM classifies into event/state/summary/decision/observation</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+      <li class="stage" data-stage="read">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Read</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">FTS5 keyword candidates + LLM rerank</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+      <li class="stage" data-stage="modify">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Modify</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">Tier-aware rerank → EMA feedback on top-K (core/tiering.py)</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+      <li class="stage" data-stage="write">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Write</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">INSERT into memory_records</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+      <li class="stage" data-stage="store">
+        <span class="stage-marker" aria-hidden="true"></span>
+        <div class="stage-body">
+          <div class="stage-head"><span class="stage-name">Store</span><span class="stage-status">idle</span></div>
+          <div class="stage-desc">Tier=cold, temp=0.5, audit_log entry</div>
+          <div class="stage-data" hidden></div>
+        </div>
+      </li>
+    </ol>
+
+    <footer class="pipeline-foot">
+      <span class="foot-line">FTS5 + LLM rerank + tier-aware reranker</span>
+      <span class="foot-line">core/tiering.py · core/audit.py · schema v2</span>
+    </footer>
+  </aside>
+
+</main>
+
+<button id="demo-banner" class="demo-banner" type="button" hidden>
+  <span class="demo-dot"></span>
+  <span id="demo-banner-text">Demo mode — pipeline simulated locally.</span>
+</button>
+
+<!-- ═══ Connect LLM modal (only visible when triggered) ═══ -->
+<div id="llm-modal" class="modal" hidden>
+  <div class="modal-overlay"></div>
+  <div class="modal-card">
+    <button class="modal-close" id="llm-modal-close" aria-label="Close">×</button>
+    <div class="modal-eyebrow">browser-direct LLM</div>
+    <h2>Connect a free OpenRouter key</h2>
+    <p class="modal-lede">
+      Paste a free OpenRouter API key to make this demo's pipeline run against a real LLM.
+      Your key stays in this browser's localStorage and is sent only to OpenRouter directly —
+      Hyperagent never sees it.
+    </p>
+    <ol class="modal-steps">
+      <li>Visit <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">openrouter.ai/keys</a> (no credit card required for free models).</li>
+      <li>Create a key and copy it.</li>
+      <li>Paste it below. The default free model is Google Gemini 2.0 Flash Exp.</li>
+    </ol>
+    <form id="llm-form" class="modal-form">
+      <label class="modal-label" for="llm-key-input">OpenRouter API key</label>
+      <input id="llm-key-input" class="modal-input" type="password" placeholder="sk-or-v1-..." autocomplete="off" required>
+      <label class="modal-label" for="llm-model-input">Model (optional)</label>
+      <input id="llm-model-input" class="modal-input" type="text" placeholder="google/gemini-2.0-flash-exp:free" autocomplete="off">
+      <div class="modal-actions">
+        <button type="button" class="modal-btn modal-btn-secondary" id="llm-disconnect">Disconnect</button>
+        <button type="submit" class="modal-btn modal-btn-primary" id="llm-submit">Connect</button>
+      </div>
+      <p class="modal-disclaimer">Stored locally. <button type="button" class="modal-link" id="llm-clear-memories">Clear stored memories</button></p>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
